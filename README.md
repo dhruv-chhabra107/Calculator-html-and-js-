@@ -12,6 +12,6 @@ A simple and responsive calculator built using HTML, CSS, and JavaScript.
 - JavaScript
 ## Preview
 Calculator Screenshot
-- <img width="510" height="523" alt="image" src="https://github.com/user-attachments/assets/ff0fe6d9-d118-4077-8c26-75c698477888" />
-## Project structure
+<img width="966" height="738" alt="image" src="https://github.com/user-attachments/assets/29178909-1e61-4b2e-9afe-a371644d3341" />
+
 index.html (contains html, css and js)
