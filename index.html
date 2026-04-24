@@ -1,61 +1,126 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Basic Calculator</title>
+    <title>Glass Calculator</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+        }
+
+        .calc {
+            backdrop-filter: blur(20px);
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            width: 300px;
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .btns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.08);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .equal {
+            background: rgba(0,255,200,0.3);
+        }
+    </style>
 </head>
 
-<body bgcolor="lightblue">
+<body>
 
-<center>
-<h2>Calculator</h2>
+<div class="calc">
+    <input type="text" id="display" disabled>
 
-<form>
-    Enter First Number:
-    <input type="text" id="a" style="background-color:black; color:white;"><br><br>
+    <div class="btns">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="del()">⌫</button>
+        <button onclick="press('/')">÷</button>
+        <button onclick="press('*')">×</button>
 
-    Enter Second Number:
-    <input type="text" id="b" style="background-color:black; color:white;"><br><br>
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button onclick="press('-')">−</button>
 
-    Select Operation:<br>
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button onclick="press('+')">+</button>
 
-    <input type="radio" name="op" value="+" checked> Addition<br>
-    <input type="radio" name="op" value="-"> Subtraction<br>
-    <input type="radio" name="op" value="*"> Multiplication<br>
-    <input type="radio" name="op" value="/"> Division<br><br>
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button class="equal" onclick="calculate()">=</button>
 
-    <input type="button" value="Calculate" onclick="calc()">
-</form>
-
-<h3 id="ans"></h3>
-</center>
+        <button onclick="press('0')" style="grid-column: span 2;">0</button>
+        <button onclick="press('.')">.</button>
+    </div>
+</div>
 
 <script>
-function calc() {
-    var x = document.getElementById("a").value;
-    var y = document.getElementById("b").value;
+let display = document.getElementById("display");
 
-    var op = document.querySelector('input[name="op"]:checked').value;
+function press(val) {
+    display.value += val;
+}
 
-    if (x === "" || y === "") {
-        document.getElementById("ans").innerHTML = "Enter both values";
-        return;
+function clearDisplay() {
+    display.value = "";
+}
+
+function del() {
+    display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
     }
-
-    x = parseFloat(x);
-    y = parseFloat(y);
-    var result;
-
-    if (op == "+") result = x + y;
-    else if (op == "-") result = x - y;
-    else if (op == "*") result = x * y;
-    else if (op == "/") {
-        if (y == 0) {
-            document.getElementById("ans").innerHTML = "Cannot divide by zero";
-            return;
-        }
-        result = x / y;
-    }
-
-    document.getElementById("ans").innerHTML = "Result = " + result;
 }
 </script>
 
