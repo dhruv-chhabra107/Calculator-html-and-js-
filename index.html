@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Basic Calculator</title>
+</head>
+
+<body bgcolor="lightblue">
+
+<center>
+<h2>Calculator</h2>
+
+<form>
+    Enter First Number:
+    <input type="text" id="a" style="background-color:black; color:white;"><br><br>
+
+    Enter Second Number:
+    <input type="text" id="b" style="background-color:black; color:white;"><br><br>
+
+    Select Operation:<br>
+
+    <input type="radio" name="op" value="+" checked> Addition<br>
+    <input type="radio" name="op" value="-"> Subtraction<br>
+    <input type="radio" name="op" value="*"> Multiplication<br>
+    <input type="radio" name="op" value="/"> Division<br><br>
+
+    <input type="button" value="Calculate" onclick="calc()">
+</form>
+
+<h3 id="ans"></h3>
+</center>
+
+<script>
+function calc() {
+    var x = document.getElementById("a").value;
+    var y = document.getElementById("b").value;
+
+    var op = document.querySelector('input[name="op"]:checked').value;
+
+    if (x === "" || y === "") {
+        document.getElementById("ans").innerHTML = "Enter both values";
+        return;
+    }
+
+    x = parseFloat(x);
+    y = parseFloat(y);
+    var result;
+
+    if (op == "+") result = x + y;
+    else if (op == "-") result = x - y;
+    else if (op == "*") result = x * y;
+    else if (op == "/") {
+        if (y == 0) {
+            document.getElementById("ans").innerHTML = "Cannot divide by zero";
+            return;
+        }
+        result = x / y;
+    }
+
+    document.getElementById("ans").innerHTML = "Result = " + result;
+}
+</script>
+
+</body>
+</html>
